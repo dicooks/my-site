@@ -126,13 +126,31 @@
             margin-bottom: 22px; font-weight: 700; color: #fff;
         }
         .hero h1 em { font-style: italic; color: var(--gold); font-weight: 500; }
+
+        /* Усиленный продающий текст */
         .hero p {
-            font-size: 17px; font-weight: 300; max-width: 560px; margin: 0 auto 40px;
-            color: rgba(245,240,235,0.8);
+            font-size: 17px; font-weight: 300; max-width: 600px; margin: 0 auto 30px;
+            color: rgba(245,240,235,0.85);
         }
         .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-        /* Sections */
+        /* Триггеры под кнопками */
+        .hero-triggers {
+            margin-top: 16px;
+            font-size: 13px;
+            color: rgba(245,240,235,0.75);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 24px;
+        }
+        .hero-triggers span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Секции */
         .section { padding: 96px 0; }
         .section-label {
             text-align: center; margin-bottom: 14px;
@@ -154,6 +172,14 @@
         .why-icon { font-size: 36px; margin-bottom: 20px; display: block; }
         .why-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--light); }
         .why-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+        /* Психологический триггер в WHY */
+        .why-trigger {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(245,240,235,0.75);
+            font-size: 13px;
+        }
 
         /* Services */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; margin-top: 40px; }
@@ -226,7 +252,7 @@
         .stat-number { font-family: 'Playfair Display', serif; font-size: 54px; font-weight: 700; color: var(--gold); line-height: 1; }
         .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 10px; }
 
-        /* Menu - БЛЮДА С ФОТО */
+        /* Menu */
         .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 50px; }
         .dish-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.3s; }
         .dish-card:hover { border-color: var(--border-h); }
@@ -304,7 +330,7 @@
             to { transform: translateX(-50%); }
         }
 
-        /* ===== ФОРМА С FORMPREE ===== */
+        /* ===== ФОРМА ===== */
         .form-wrap {
             background: var(--card);
             border: 1px solid var(--border);
@@ -341,7 +367,6 @@
         .field select option { background: #1a1a1a; }
         .field textarea { resize: vertical; min-height: 100px; }
 
-        /* Кнопка отправки формы */
         .btn-submit {
             width: 100%;
             padding: 15px 34px;
@@ -359,7 +384,6 @@
         }
         .btn-submit:hover { background: var(--gold-h); }
 
-        /* Сообщение об успехе */
         .form-success {
             display: none;
             text-align: center;
@@ -392,29 +416,9 @@
         .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .fade-in.visible { opacity: 1; transform: none; }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            nav, .btn-wa { display: none; }
-            .burger { display: flex; }
-            .about-block { grid-template-columns: 1fr; }
-            .about-photo::after { display: none; }
-            .menu-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-card:first-child { grid-row: span 1; }
-            .gallery-card img { min-height: 260px; }
-            .stats { flex-direction: column; }
-            .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px; }
-            .stat-item:last-child { border-bottom: none; }
-            .footer-inner { grid-template-columns: 1fr; text-align: center; }
-            .form-wrap { padding: 36px 24px; }
-            .form-row { grid-template-columns: 1fr; }
-            .benefit-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
-            .review-card { min-width: 280px; max-width: 280px; }
-        }
+        /* ===== БЛОКИ ДЛЯ УЛУЧШЕНИЯ КОНВЕРСИИ ===== */
 
-        /* ===== НОВЫЕ БЛОКИ ===== */
-
-        /* БЛОК 1: STICKY-КНОПКИ */
+        /* Стикеры (убираем лишние, оставляем только MAX) */
         .sticky-social {
             position: fixed;
             right: 18px;
@@ -444,7 +448,7 @@
             transform: translateX(-4px) scale(1.05);
         }
 
-        /* БЛОК 2: FLOATING КНОПКА MAX */
+        /* Floating MAX (оставляем как дополнительный канал) */
         .floating-max {
             position: fixed;
             bottom: 24px;
@@ -464,51 +468,7 @@
             50% { box-shadow: 0 10px 30px rgba(197,164,109,0.25); }
         }
 
-        /* БЛОК 3: HERO CTA + ВОРОНКА */
-        .hero-max-btn {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 16px 32px;
-            background: linear-gradient(135deg, #C5A46D, #b89255);
-            color: #0B0B0B;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-decoration: none;
-            border-radius: 3px;
-            position: relative;
-            overflow: hidden;
-            animation: glowPulse 2.5s infinite;
-        }
-        .hero-max-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -60%;
-            width: 50%;
-            height: 100%;
-            background: rgba(255,255,255,0.25);
-            transform: skewX(-25deg);
-            animation: shine 3.5s infinite;
-        }
-        @keyframes shine {
-            0% { left: -60%; }
-            100% { left: 140%; }
-        }
-        @keyframes glowPulse {
-            0%,100% { box-shadow: 0 0 0 rgba(197,164,109,0); }
-            50% { box-shadow: 0 0 18px rgba(197,164,109,0.35); }
-        }
-        .funnel-flow {
-            margin-top: 14px;
-            font-size: 12px;
-            opacity: 0.85;
-        }
-        .funnel-flow a {
-            color: #C5A46D;
-            text-decoration: none;
-        }
-
-        /* ===== МОБИЛЬНАЯ CTA (добавлено) ===== */
+        /* Мобильная CTA панель (только 3 кнопки) */
         .mobile-cta {
             display: none;
         }
@@ -537,6 +497,8 @@
                 color: #C5A46D;
                 text-decoration: none;
                 border-right: 1px solid rgba(197,164,109,0.2);
+                font-weight: 600;
+                letter-spacing: 0.05em;
             }
 
             .mobile-cta a:last-child {
@@ -545,6 +507,26 @@
                 color: #0B0B0B;
                 font-weight: 700;
             }
+        }
+
+        /* Дополнительные правки для мобильной навигации */
+        @media (max-width: 900px) {
+            nav, .btn-wa { display: none; }
+            .burger { display: flex; }
+            .about-block { grid-template-columns: 1fr; }
+            .about-photo::after { display: none; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-card:first-child { grid-row: span 1; }
+            .gallery-card img { min-height: 260px; }
+            .stats { flex-direction: column; }
+            .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px; }
+            .stat-item:last-child { border-bottom: none; }
+            .footer-inner { grid-template-columns: 1fr; text-align: center; }
+            .form-wrap { padding: 36px 24px; }
+            .form-row { grid-template-columns: 1fr; }
+            .benefit-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
+            .review-card { min-width: 280px; max-width: 280px; }
         }
     </style>
 </head>
@@ -578,34 +560,32 @@
     <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" style="color:var(--gold);">💬 MAX</a>
 </div>
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO (с MAX как главным каналом) ===== -->
 <section class="hero">
     <div class="hero-content">
         <div class="hero-eyebrow">Кострома &amp; область · Выездной шеф</div>
         <h1>Ваш личный кулинарный гид<br/>для <em>особых моментов</em></h1>
-        <!-- Текст усилен продающим сообщением -->
-        <p>Ресторанный уровень у вас дома. Частные ужины, кейтеринг и мероприятия под ключ — без вашего участия, с полной организацией и уборкой кухни.</p>
+        <!-- Продающий текст с ценой и триггерами -->
+        <p>
+            Ресторанный уровень у вас дома. Частные ужины и кейтеринг под ключ — от 5 000 ₽ за вечер.<br/>
+            Закупка, готовка, подача и уборка включены.
+        </p>
         <div class="hero-btns">
-            <!-- Кнопка с усиленным CTA -->
-            <a class="btn" href="#contact">Получить расчёт меню</a>
+            <!-- ГЛАВНАЯ КНОПКА — MAX -->
+            <a class="btn" href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">Написать и рассчитать меню</a>
             <a class="btn btn-outline" href="#menu">Смотреть меню</a>
         </div>
-        <!-- Дополнительный блок-убеждение -->
-        <div style="margin-top:18px;font-size:13px;color:rgba(245,240,235,0.7);">
-            ⚡ Ответ в течение 1 часа · Работаю под ключ · Кострома и область
+        <!-- Триггеры: срочность, цена, без хлопот -->
+        <div class="hero-triggers">
+            <span>⚡ Свободные даты ограничены</span>
+            <span>📅 Бронирование за 1–3 дня</span>
+            <span>🧹 Без хлопот — уборка включена</span>
         </div>
-
-        <!-- БЛОК 3: HERO CTA + ВОРОНКА -->
-        <a class="hero-max-btn" href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">Написать в MAX</a>
-        <div class="funnel-flow">
-            <a href="https://vk.com/di_chef" target="_blank">Смотреть кейсы VK</a> →
-            <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI">Заказать в MAX</a>
+        <!-- Доп. убеждение: прямой контакт, без посредников -->
+        <div style="margin-top:18px;font-size:12px;color:rgba(245,240,235,0.65);">
+            ✔ без посредников · ✔ прямой контакт · ✔ быстрое согласование
         </div>
-
-        <a href="https://vk.com/di_chef" style="display:block;margin:22px auto 0;padding:18px 22px;max-width:520px;border:1px solid rgba(197,164,109,0.35);background:rgba(28,28,28,0.6);text-decoration:none;color:#C5A46D;backdrop-filter:blur(10px);" target="_blank">
-            <div style="font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">VK Сообщество</div>
-            <div style="font-size:12px;color:#9A9189;margin-top:4px;">Рецепты · Кейтеринг · Закулисье мероприятий</div>
-        </a>
+        <!-- Убираем все лишние ссылки на VK и Telegram из первого экрана -->
     </div>
 </section>
 
@@ -636,6 +616,10 @@
                 <h3>Только фермерское</h3>
                 <p>Работаю исключительно с проверенными локальными поставщиками. Без полуфабрикатов и консервантов.</p>
             </div>
+        </div>
+        <!-- Психологический триггер: индивидуальный подход -->
+        <div class="why-trigger">
+            💬 Каждый заказ — индивидуальный проект, не потоковое обслуживание
         </div>
     </div>
 </section>
@@ -792,7 +776,7 @@
                     <p>«Теперь регулярно заказываем готовые блюда на неделю. Экономит время и очень удобно.»</p>
                     <span>Семья Кузнецовых</span>
                 </div>
-                <!-- Дубликаты для анимации -->
+                <!-- Дубли для бесконечной прокрутки -->
                 <div class="review-card">
                     <p>«Диана организовала день рождения на 18 гостей. Всё прошло безупречно: от подачи закусок до финального десерта. Кухня осталась чище, чем была до прихода!»</p>
                     <span>Елена • День рождения</span>
@@ -890,7 +874,7 @@
     </div>
 </section>
 
-<!-- ===== CONTACT FORM С FORMPREE ===== -->
+<!-- ===== CONTACT FORM (с усилением) ===== -->
 <section class="section" id="contact">
     <div class="container">
         <div class="section-label">Заявка</div>
@@ -898,7 +882,11 @@
         <div class="divider"></div>
         <p class="section-sub" style="margin-bottom:48px;">Оставьте заявку — перезвоню в течение часа</p>
 
-        <!-- Сама форма -->
+        <!-- Убеждение перед формой -->
+        <p style="text-align:center;color:rgba(245,240,235,0.75);margin-bottom:20px;">
+            Ответ в течение 1 часа · Подбор меню бесплатно
+        </p>
+
         <div class="form-wrap fade-in" id="formWrap">
             <form id="orderForm" action="https://formspree.io/f/mbdeblwg" method="POST">
                 <div class="form-row">
@@ -927,18 +915,20 @@
                     <label for="details">Дата, количество гостей, пожелания</label>
                     <textarea id="details" name="Детали заказа" placeholder="Например: ужин 12 декабря, 6 персон, хотим морепродукты и без глютена"></textarea>
                 </div>
-                <button class="btn-submit" type="submit">Отправить заявку</button>
+                <button class="btn-submit" type="submit">Получить расчёт меню</button>
                 <p class="form-note">Нажимая «Отправить», вы соглашаетесь с <a href="#" style="color:var(--gold);">политикой конфиденциальности</a></p>
             </form>
 
-            <!-- Блок успешной отправки -->
             <div class="form-success" id="formSuccess">
                 <h3>✅ Спасибо, заявка отправлена!</h3>
                 <p>Я свяжусь с вами в ближайшее время.</p>
             </div>
         </div>
 
-        <p class="form-note" style="margin-top:20px;">Или напишите напрямую: <a href="https://t.me/didi327439" style="color:var(--gold);">Telegram</a> · <a href="https://instagram.com/diana_chef" style="color:var(--gold);">Instagram</a></p>
+        <!-- Доп. ссылки теперь внизу, не в hero -->
+        <p class="form-note" style="margin-top:20px;">
+            Также можно написать в <a href="https://t.me/didi327439" style="color:var(--gold);">Telegram</a> или <a href="https://instagram.com/diana_chef" style="color:var(--gold);">Instagram</a>
+        </p>
     </div>
 </section>
 
@@ -957,7 +947,7 @@
     </div>
 </section>
 
-<!-- ===== VK ===== -->
+<!-- ===== VK / CRM БЛОКИ (оставляем внизу) ===== -->
 <section class="section" id="vk" style="background:#0E0E0E;">
     <div class="container">
         <div class="section-label">Сообщество</div>
@@ -970,7 +960,7 @@
     </div>
 </section>
 
-<!-- ===== CRM QUICK LINKS ===== -->
+<!-- ===== CRM QUICK LINKS (внизу) ===== -->
 <section class="section" id="crm" style="background:#0B0B0B;">
     <div class="container">
         <div class="section-label">Быстрая связь</div>
@@ -1000,21 +990,20 @@
     </div>
 </footer>
 
-<!-- ===== STICKY SOCIAL (БЛОК 1) ===== -->
+<!-- ===== STICKY SOCIAL (только MAX, как основной) ===== -->
 <div class="sticky-social">
-    <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">✦</a>
-    <a href="https://vk.com/di_chef" target="_blank">◆</a>
-    <a href="https://t.me/diana_chef" target="_blank">✉</a>
+    <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank" title="Написать в MAX">✦</a>
+    <!-- Убрали остальные иконки, чтобы не отвлекать -->
 </div>
 
-<!-- ===== FLOATING MAX (БЛОК 2) ===== -->
+<!-- ===== FLOATING MAX (дублирующий) ===== -->
 <a class="floating-max" href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">Написать в MAX</a>
 
-<!-- ===== МОБИЛЬНАЯ CTA (добавлено) ===== -->
+<!-- ===== МОБИЛЬНАЯ CTA (MAX главный) ===== -->
 <div class="mobile-cta">
     <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI">MAX</a>
-    <a href="https://t.me/diana_chef">Telegram</a>
-    <a href="#contact">Заказать</a>
+    <a href="#menu">МЕНЮ</a>
+    <a href="#contact">ЗАКАЗ</a>
 </div>
 
 <!-- ===== SCRIPTS ===== -->
@@ -1047,7 +1036,7 @@
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ===== ОБРАБОТКА ФОРМЫ С FORMPREE (исправлено) =====
+    // ===== ОБРАБОТКА ФОРМЫ =====
     const form = document.getElementById('orderForm');
     const successBlock = document.getElementById('formSuccess');
 
@@ -1055,10 +1044,8 @@
         e.preventDefault();
 
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
 
         try {
-            // Отправляем как FormData, без Content-Type (браузер сам установит multipart/form-data)
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -1068,12 +1055,9 @@
             });
 
             if (response.ok) {
-                // Показываем сообщение об успехе
                 form.style.display = 'none';
                 successBlock.classList.add('show');
-
-                // Логируем данные для отладки
-                console.log('Форма успешно отправлена!', data);
+                console.log('Форма успешно отправлена!');
             } else {
                 alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне напрямую.');
             }
