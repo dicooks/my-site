@@ -467,6 +467,29 @@
             display: none;
         }
 
+        /* ===== ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ===== */
+        #privacy {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
+            margin-top: 40px;
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #privacy h3 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        #privacy p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
         @media (max-width: 768px) {
             .floating-max, .sticky-social {
                 display: none;
@@ -553,7 +576,7 @@
     <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" style="color:var(--gold);">💬 MAX</a>
 </div>
 
-<!-- ===== НОВЫЙ HERO С КВИЗОМ И ПАКЕТАМИ ===== -->
+<!-- ===== HERO ===== -->
 <section class="hero">
     <div class="hero-content">
 
@@ -566,7 +589,7 @@
             Стоимость от 5 000 ₽ за вечер — под ваш формат и количество гостей.
         </p>
 
-        <!-- ===== ПАКЕТЫ ===== -->
+        <!-- ПАКЕТЫ -->
         <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:18px;">
 
             <div style="border:1px solid rgba(197,164,109,0.35);padding:12px 16px;font-size:12px;">
@@ -586,10 +609,9 @@
 
         </div>
 
-        <!-- ===== КНОПКИ ===== -->
+        <!-- КНОПКИ -->
         <div class="hero-btns">
 
-            <!-- MAX с готовым текстом -->
             <a class="btn"
                href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI?text=Здравствуйте!%20Хочу%20заказать%20выездного%20шеф-повара.%20Подскажите%20варианты%20меню%20и%20стоимость."
                target="_blank">
@@ -599,7 +621,7 @@
             <a class="btn btn-outline" href="#menu">Смотреть блюда</a>
         </div>
 
-        <!-- ===== КВИЗ-МИНИ БЛОК ===== -->
+        <!-- КВИЗ -->
         <div style="margin-top:26px;padding:18px;border:1px solid rgba(197,164,109,0.25);background:rgba(255,255,255,0.02);">
 
             <div style="font-size:13px;margin-bottom:10px;color:rgba(245,240,235,0.8);">
@@ -963,8 +985,9 @@
                     <label for="details">Дата, количество гостей, пожелания</label>
                     <textarea id="details" name="Детали заказа" placeholder="Например: ужин 12 декабря, 6 персон, хотим морепродукты и без глютена"></textarea>
                 </div>
+                <!-- ===== ИСПРАВЛЕННАЯ ССЫЛКА НА ПОЛИТИКУ ===== -->
                 <button class="btn-submit" type="submit">Получить расчёт меню</button>
-                <p class="form-note">Нажимая «Отправить», вы соглашаетесь с <a href="#" style="color:var(--gold);">политикой конфиденциальности</a></p>
+                <p class="form-note">Нажимая «Отправить», вы соглашаетесь с <a href="#privacy" style="color:var(--gold);">политикой конфиденциальности</a></p>
             </form>
 
             <div class="form-success" id="formSuccess">
@@ -1015,8 +1038,38 @@
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:40px;">
             <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">MAX</a>
             <a href="https://vk.com/di_chef" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">VK</a>
-            <a href="https://t.me/didi327439" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">Telegram</a>
+            <a href="https://t.me/diana_chef" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">Telegram</a>
         </div>
+    </div>
+</section>
+
+<!-- ===== БЛОК ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ (ДОБАВЛЕН) ===== -->
+<section id="privacy" style="padding:60px 0;background:#0b0b0b;border-top:1px solid rgba(197,164,109,0.15);">
+    <div class="container" style="max-width:800px;color:rgba(245,240,235,0.75);font-size:13px;line-height:1.7;">
+
+        <h3 style="color:#C5A46D;margin-bottom:16px;font-size:18px;">
+            Политика конфиденциальности
+        </h3>
+
+        <p>
+            Сайт собирает только те данные, которые пользователь добровольно оставляет через форму заявки:
+            имя, телефон и описание заказа.
+        </p>
+
+        <p>
+            Эти данные используются исключительно для связи с клиентом и уточнения деталей заказа.
+            Они не передаются третьим лицам и не используются для рассылок без согласия пользователя.
+        </p>
+
+        <p>
+            Отправляя форму, пользователь соглашается на обработку персональных данных в рамках
+            выполнения запроса на услуги.
+        </p>
+
+        <p style="opacity:0.6;margin-top:12px;">
+            Последнее обновление: 2026 год
+        </p>
+
     </div>
 </section>
 
@@ -1026,7 +1079,8 @@
         <div class="footer-inner">
             <div class="footer-logo">Диана</div>
             <div class="footer-socials">
-                <a href="https://t.me/didi327439" target="_blank">Telegram</a>
+                <a href="https://instagram.com/diana_chef" target="_blank">Instagram</a>
+                <a href="https://t.me/diana_chef" target="_blank">Telegram</a>
                 <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">MAX</a>
             </div>
             <div style="text-align:right;font-size:13px;color:var(--muted);">г. Кострома и Костромская область</div>
