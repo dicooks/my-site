@@ -52,8 +52,18 @@
             font-size: 26px; font-weight: 700;
             color: var(--gold); text-decoration: none;
             letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .logo span { font-style: italic; font-weight: 500; color: var(--light); font-size: 13px; display: block; letter-spacing: 0.14em; text-transform: uppercase; margin-top: -2px; }
+        .logo-mark {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .logo span { font-style: italic; font-weight: 500; color: var(--light); font-size: 13px; display: block; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px; }
         nav a {
             color: rgba(245,240,235,0.75); text-decoration: none;
             margin-left: 28px; font-size: 12px; font-weight: 500;
@@ -211,9 +221,8 @@
             position: relative; overflow: hidden;
             border: 1px solid var(--border);
         }
-        .gallery-card:first-child { grid-row: span 2; }
         .gallery-card img {
-            width: 100%; height: 100%; min-height: 220px;
+            width: 100%; height: 100%; min-height: 280px;
             object-fit: cover; display: block;
             transition: transform 0.6s ease, filter 0.3s;
             filter: brightness(0.82);
@@ -326,6 +335,73 @@
         @keyframes scrollReviews {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
+        }
+
+        /* Event photos slider (плавающая лента фото с мероприятий) */
+        .photos-slider {
+            overflow: hidden;
+            position: relative;
+            margin-top: 50px;
+            padding: 20px 0;
+        }
+        .photos-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: scrollPhotos 42s linear infinite;
+        }
+        .photos-slider:hover .photos-track { animation-play-state: paused; }
+        .photo-card {
+            position: relative;
+            min-width: 280px;
+            max-width: 280px;
+            height: 360px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+        }
+        .photo-card img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            filter: brightness(0.85);
+            transition: transform 0.6s ease, filter 0.3s;
+        }
+        .photo-card:hover img { transform: scale(1.06); filter: brightness(0.98); }
+        .photo-card-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 18px 16px 14px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+        }
+        .photo-card-caption span {
+            font-size: 12px;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+        @keyframes scrollPhotos {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Dishes slider (плавающая лента примеров блюд) */
+        .dishes-slider {
+            overflow: hidden;
+            position: relative;
+            margin-top: 10px;
+        }
+        .dishes-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: scrollDishes 55s linear infinite;
+        }
+        .dishes-slider:hover .dishes-track { animation-play-state: paused; }
+        @keyframes scrollDishes {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .dish-card {
+            min-width: 260px;
+            max-width: 260px;
         }
 
         /* ===== ФОРМА ===== */
@@ -491,6 +567,8 @@
         }
 
         @media (max-width: 768px) {
+            .logo-mark { height: 38px; width: 38px; }
+            .logo { font-size: 20px; gap: 8px; }
             .floating-max, .sticky-social {
                 display: none;
             }
@@ -533,8 +611,7 @@
             .about-photo::after { display: none; }
             .menu-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: 1fr; }
-            .gallery-card:first-child { grid-row: span 1; }
-            .gallery-card img { min-height: 260px; }
+            .gallery-card img { min-height: 240px; }
             .stats { flex-direction: column; }
             .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px; }
             .stat-item:last-child { border-bottom: none; }
@@ -543,6 +620,9 @@
             .form-row { grid-template-columns: 1fr; }
             .benefit-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
             .review-card { min-width: 280px; max-width: 280px; }
+            .photo-card { min-width: 220px; max-width: 220px; height: 290px; }
+            .dish-card { min-width: 220px; max-width: 220px; }
+            .dish-img img { height: 200px; }
         }
     </style>
 </head>
@@ -551,13 +631,17 @@
 <!-- ===== HEADER ===== -->
 <header id="header">
     <div class="container header-inner">
-        <a class="logo" href="#">Диана <span>«Проводник в мир авторской кухни»</span></a>
+        <a class="logo" href="#">
+            <img alt="Di Personal Chef логотип" class="logo-mark" src="assets/logo.png"/>
+            <span class="logo-text">DI<span>«Проводник в мир авторской кухни»</span></span>
+        </a>
         <nav>
             <a href="#why">Преимущества</a>
             <a href="#services">Услуги</a>
             <a href="#about">Обо мне</a>
             <a href="#gallery">Галерея</a>
             <a href="#menu">Меню</a>
+            <a href="#event-photos">Фото с мероприятий</a>
             <a href="#reviews">Отзывы</a>
             <a class="btn-wa" href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI">MAX</a>
         </nav>
@@ -572,6 +656,7 @@
     <a href="#about" onclick="closeMenu()">Обо мне</a>
     <a href="#gallery" onclick="closeMenu()">Галерея</a>
     <a href="#menu" onclick="closeMenu()">Меню</a>
+    <a href="#event-photos" onclick="closeMenu()">Фото с мероприятий</a>
     <a href="#reviews" onclick="closeMenu()">Отзывы</a>
     <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" style="color:var(--gold);">💬 MAX</a>
 </div>
@@ -705,7 +790,7 @@
         <div class="services-grid">
             <div class="service-card fade-in">
                 <div class="service-img-wrap">
-                    <img alt="Повар на дом" class="service-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Повар на дом" class="service-img" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="service-body">
                     <h3>Повар на дом</h3>
@@ -714,7 +799,7 @@
             </div>
             <div class="service-card fade-in">
                 <div class="service-img-wrap">
-                    <img alt="Доставка готовой еды" class="service-img" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Доставка готовой еды" class="service-img" src="https://images.unsplash.com/photo-1543353071-c953d88f7033?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="service-body">
                     <h3>Доставка на неделю</h3>
@@ -723,7 +808,7 @@
             </div>
             <div class="service-card fade-in">
                 <div class="service-img-wrap">
-                    <img alt="Фуршеты и банкеты" class="service-img" src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Фуршеты и банкеты" class="service-img" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="service-body">
                     <h3>Фуршеты и банкеты</h3>
@@ -732,7 +817,7 @@
             </div>
             <div class="service-card fade-in">
                 <div class="service-img-wrap">
-                    <img alt="Кейтеринг в офис" class="service-img" src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Кейтеринг в офис" class="service-img" src="https://images.unsplash.com/photo-1515683359900-6922e4964be1?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="service-body">
                     <h3>Кейтеринг в офис</h3>
@@ -741,7 +826,7 @@
             </div>
             <div class="service-card fade-in">
                 <div class="service-img-wrap">
-                    <img alt="Кулинарные мастер-классы" class="service-img" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Кулинарные мастер-классы" class="service-img" src="https://images.unsplash.com/photo-1769720204157-7ad4e8b3f95b?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="service-body">
                     <h3>Кулинарные мастер-классы</h3>
@@ -761,24 +846,31 @@
         <p class="section-sub">Каждая деталь — от сервировки до подачи — создаётся с вниманием и заботой</p>
         <div class="gallery-grid">
             <div class="gallery-card fade-in">
-                <img alt="Частный ужин" src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                <img alt="Выездной кейтеринг" src="https://images.unsplash.com/photo-1687369595840-e96a912586f1?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                <div class="gallery-caption">
+                    <h4>Выездной кейтеринг</h4>
+                    <p>Обслуживание на вашей территории</p>
+                </div>
+            </div>
+            <div class="gallery-card fade-in">
+                <img alt="Кулинарные мастер-классы" src="https://images.unsplash.com/photo-1758874960859-77d33502cbf4?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                <div class="gallery-caption">
+                    <h4>Кулинарные мастер-классы</h4>
+                    <p>Готовим вместе: пары, компании, команды</p>
+                </div>
+            </div>
+            <div class="gallery-card fade-in">
+                <img alt="Частный ужин" src="https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?w=800&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 <div class="gallery-caption">
                     <h4>Частные ужины</h4>
                     <p>Романтические вечера и семейные торжества</p>
                 </div>
             </div>
             <div class="gallery-card fade-in">
-                <img alt="Корпоративный фуршет" src="https://images.unsplash.com/photo-1555244162-803834f70033?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                <img alt="Доставка готовой еды" src="https://images.unsplash.com/photo-1666819691716-827f78d892f3?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 <div class="gallery-caption">
-                    <h4>Корпоративные мероприятия</h4>
-                    <p>Фуршеты, кофе-брейки, тимбилдинги</p>
-                </div>
-            </div>
-            <div class="gallery-card fade-in">
-                <img alt="Выездной кейтеринг" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
-                <div class="gallery-caption">
-                    <h4>Выездной кейтеринг</h4>
-                    <p>Обслуживание на вашей территории</p>
+                    <h4>Доставка готовой еды</h4>
+                    <p>Авторское меню на неделю с доставкой на дом</p>
                 </div>
             </div>
         </div>
@@ -876,14 +968,18 @@
         <h2 class="section-title">Примеры блюд</h2>
         <div class="divider"></div>
         <p class="section-sub">Изысканные сочетания вкусов с акцентом на сезонные фермерские продукты</p>
-        <div class="menu-grid">
+        <p style="text-align:center;color:rgba(245,240,235,0.75);font-size:14px;max-width:640px;margin:-30px auto 50px;line-height:1.7;">
+            Это лишь несколько примеров блюд из моей практики. Полное меню — десятки позиций на любой вкус и бюджет — пришлю индивидуально в <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI?text=Здравствуйте!%20Хочу%20посмотреть%20подробное%20меню%20блюд." style="color:var(--gold);text-decoration:underline;" target="_blank">MAX</a> с учётом формата мероприятия и пожеланий гостей.
+        </p>
+        <div class="dishes-slider">
+            <div class="dishes-track">
             <div class="dish-card fade-in">
                 <div class="dish-img">
-                    <img alt="Утиная грудка магре" src="https://images.unsplash.com/photo-1580959375944-abd7e991f971?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <img alt="Стейк филе-миньон" src="https://images.unsplash.com/photo-1726677730666-fdc08a8da464?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
                 </div>
                 <div class="dish-info">
-                    <h4>Утиная грудка магре</h4>
-                    <p>с брусничным соусом, пюре из сельдерея и карамелизированной грушей</p>
+                    <h4>Стейк филе-миньон</h4>
+                    <p>нежная говяжья вырезка с соусом из красного вина и сливочным маслом</p>
                     <span class="dish-tag">Горячее блюдо</span>
                 </div>
             </div>
@@ -917,6 +1013,267 @@
                     <span class="dish-tag">Закуска</span>
                 </div>
             </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Тартар из говядины" src="https://images.unsplash.com/photo-1571513062809-2ac71eab2656?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Тартар из говядины</h4>
+                    <p>классический тартар с перепелиным яйцом, каперсами и хрустящими тостами</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Крем-суп из тыквы" src="https://images.unsplash.com/photo-1541095441899-5d96a6da10b8?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Крем-суп из тыквы</h4>
+                    <p>со сливками, тыквенными семечками и ароматным маслом шалфея</p>
+                    <span class="dish-tag">Суп</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Лосось на гриле" src="https://images.unsplash.com/photo-1546970361-407ddc8053fc?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Лосось на гриле</h4>
+                    <p>с цитрусовым соусом, свежими травами и овощным гарниром</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Ризотто с лесными грибами" src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Ризотто с лесными грибами</h4>
+                    <p>кремовое ризотто с пармезаном и ароматом трюфеля</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Паста с морепродуктами" src="https://images.unsplash.com/photo-1632778129004-f142ce499b3e?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Паста с морепродуктами</h4>
+                    <p>с мидиями, чесноком, белым вином и томатами черри</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Брускетта с томатами" src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Брускетта с томатами и базиликом</h4>
+                    <p>хрустящий хлеб с томатами черри, базиликом и оливковым маслом</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Чизкейк с черникой" src="https://images.unsplash.com/photo-1702925614886-50ad13c88d3f?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Чизкейк с черникой</h4>
+                    <p>нежный чизкейк со свежей черникой и тонкой кремовой текстурой</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Тирамису" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Тирамису</h4>
+                    <p>классический итальянский десерт с маскарпоне и кофейными нотами</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Капрезе" src="https://images.unsplash.com/photo-1769458313860-3c8db667d990?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Капрезе с моцареллой</h4>
+                    <p>томаты, моцарелла буффало, базилик и бальзамический соус</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Куриное филе на гриле" src="https://images.unsplash.com/photo-1762631934518-f75e233413ca?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Куриное филе на гриле</h4>
+                    <p>с томатами черри, свежей зеленью и лёгким овощным гарниром</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Клубничный десерт со сливками" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Клубничный десерт со сливками</h4>
+                    <p>свежая клубника со взбитыми сливками в изящной подаче</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Стейк филе-миньон" src="https://images.unsplash.com/photo-1726677730666-fdc08a8da464?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Стейк филе-миньон</h4>
+                    <p>нежная говяжья вырезка с соусом из красного вина и сливочным маслом</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Стейк рибай" src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Стейк рибай на кости</h4>
+                    <p>с трюфельным маслом, печёным картофелем и соусом демиглас</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Шоколадный фондан" src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Шоколадный фондан</h4>
+                    <p>с ванильным мороженым, свежей малиной и мятным соусом</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Будда-боул с авокадо и бататом" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Будда-боул с авокадо и бататом</h4>
+                    <p>с авокадо, бататом, нутом, арбузной редькой, миксом салата и йогуртовой заправкой</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Тартар из говядины" src="https://images.unsplash.com/photo-1571513062809-2ac71eab2656?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Тартар из говядины</h4>
+                    <p>классический тартар с перепелиным яйцом, каперсами и хрустящими тостами</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Крем-суп из тыквы" src="https://images.unsplash.com/photo-1541095441899-5d96a6da10b8?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Крем-суп из тыквы</h4>
+                    <p>со сливками, тыквенными семечками и ароматным маслом шалфея</p>
+                    <span class="dish-tag">Суп</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Лосось на гриле" src="https://images.unsplash.com/photo-1546970361-407ddc8053fc?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Лосось на гриле</h4>
+                    <p>с цитрусовым соусом, свежими травами и овощным гарниром</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Ризотто с лесными грибами" src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Ризотто с лесными грибами</h4>
+                    <p>кремовое ризотто с пармезаном и ароматом трюфеля</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Паста с морепродуктами" src="https://images.unsplash.com/photo-1632778129004-f142ce499b3e?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Паста с морепродуктами</h4>
+                    <p>с мидиями, чесноком, белым вином и томатами черри</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Брускетта с томатами" src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Брускетта с томатами и базиликом</h4>
+                    <p>хрустящий хлеб с томатами черри, базиликом и оливковым маслом</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Чизкейк с черникой" src="https://images.unsplash.com/photo-1702925614886-50ad13c88d3f?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Чизкейк с черникой</h4>
+                    <p>нежный чизкейк со свежей черникой и тонкой кремовой текстурой</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Тирамису" src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Тирамису</h4>
+                    <p>классический итальянский десерт с маскарпоне и кофейными нотами</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Капрезе" src="https://images.unsplash.com/photo-1769458313860-3c8db667d990?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Капрезе с моцареллой</h4>
+                    <p>томаты, моцарелла буффало, базилик и бальзамический соус</p>
+                    <span class="dish-tag">Закуска</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Куриное филе на гриле" src="https://images.unsplash.com/photo-1762631934518-f75e233413ca?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Куриное филе на гриле</h4>
+                    <p>с томатами черри, свежей зеленью и лёгким овощным гарниром</p>
+                    <span class="dish-tag">Горячее блюдо</span>
+                </div>
+            </div>
+            <div class="dish-card fade-in">
+                <div class="dish-img">
+                    <img alt="Клубничный десерт со сливками" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                </div>
+                <div class="dish-info">
+                    <h4>Клубничный десерт со сливками</h4>
+                    <p>свежая клубника со взбитыми сливками в изящной подаче</p>
+                    <span class="dish-tag">Десерт</span>
+                </div>
+            </div>
+            </div>
         </div>
 
         <div class="benefits-bar">
@@ -939,6 +1296,101 @@
                 <div class="benefit-text">
                     <h5>Винное сопровождение</h5>
                     <p>Идеальные пары к блюдам</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EVENT PHOTOS (плавающая лента фото с мероприятий) ===== -->
+<section class="section" id="event-photos" style="background:#0E0E0E;">
+    <div class="container">
+        <div class="section-label">Живые кадры</div>
+        <h2 class="section-title">Фото с мероприятий</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Реальные моменты с ужинов, банкетов и праздников — без постановки, только атмосфера</p>
+        <div class="photos-slider">
+            <div class="photos-track">
+                <div class="photo-card">
+                    <img alt="Шеф подаёт блюдо гостям" src="https://images.unsplash.com/photo-1750943082452-c714763f73b2?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Подача блюда</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Сервировка праздничного стола" src="https://images.unsplash.com/photo-1759335514530-43ac3c515a72?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Праздничная сервировка</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Гости поднимают тост" src="https://images.unsplash.com/photo-1509458844418-596a0af865da?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Тёплая атмосфера</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Фуршетный стол с блюдами" src="https://images.unsplash.com/photo-1686853021522-1b0e9a81706e?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Фуршет на мероприятии</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Повар раскладывает блюдо" src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Работа на кухне</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Гости за накрытым столом" src="https://images.unsplash.com/photo-1519671282429-b44660ead0a7?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Семейный ужин</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Праздничный торт" src="https://images.unsplash.com/photo-1555689501-ca921e629309?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>День рождения</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Подача вина гостям" src="https://images.unsplash.com/photo-1556710808-a2bc27a448f2?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Винное сопровождение</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Тост с шампанским" src="https://images.unsplash.com/photo-1521321335080-61c4776db11b?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Торжественный момент</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Изящная подача авторского блюда" src="https://images.unsplash.com/photo-1750943082640-66f9fd0a4608?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Авторская подача</span></div>
+                </div>
+                <!-- дубли для бесшовной прокрутки -->
+                <div class="photo-card">
+                    <img alt="Шеф подаёт блюдо гостям" src="https://images.unsplash.com/photo-1750943082452-c714763f73b2?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Подача блюда</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Сервировка праздничного стола" src="https://images.unsplash.com/photo-1759335514530-43ac3c515a72?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Праздничная сервировка</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Гости поднимают тост" src="https://images.unsplash.com/photo-1509458844418-596a0af865da?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Тёплая атмосфера</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Фуршетный стол с блюдами" src="https://images.unsplash.com/photo-1686853021522-1b0e9a81706e?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Фуршет на мероприятии</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Повар раскладывает блюдо" src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Работа на кухне</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Гости за накрытым столом" src="https://images.unsplash.com/photo-1519671282429-b44660ead0a7?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Семейный ужин</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Праздничный торт" src="https://images.unsplash.com/photo-1555689501-ca921e629309?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>День рождения</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Подача вина гостям" src="https://images.unsplash.com/photo-1556710808-a2bc27a448f2?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Винное сопровождение</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Тост с шампанским" src="https://images.unsplash.com/photo-1521321335080-61c4776db11b?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Торжественный момент</span></div>
+                </div>
+                <div class="photo-card">
+                    <img alt="Изящная подача авторского блюда" src="https://images.unsplash.com/photo-1750943082640-66f9fd0a4608?w=600&amp;auto=format&amp;fit=crop&amp;q=80"/>
+                    <div class="photo-card-caption"><span>Авторская подача</span></div>
                 </div>
             </div>
         </div>
@@ -1038,7 +1490,7 @@
         <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:40px;">
             <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">MAX</a>
             <a href="https://vk.com/di_chef" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">VK</a>
-            <a href="https://t.me/diana_chef" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">Telegram</a>
+            <a href="https://t.me/didi327439" style="padding:14px 26px;border:1px solid #C5A46D;color:#C5A46D;text-decoration:none;">Telegram</a>
         </div>
     </div>
 </section>
@@ -1080,7 +1532,7 @@
             <div class="footer-logo">Диана</div>
             <div class="footer-socials">
                 <a href="https://instagram.com/diana_chef" target="_blank">Instagram</a>
-                <a href="https://t.me/diana_chef" target="_blank">Telegram</a>
+                <a href="https://t.me/didi327439" target="_blank">Telegram</a>
                 <a href="https://max.ru/u/f9LHodD0cOLZ5vknS0s47NAwAnrzTXubzX3MxM1dIGfMotJqNMJaThV9kpI" target="_blank">MAX</a>
             </div>
             <div style="text-align:right;font-size:13px;color:var(--muted);">г. Кострома и Костромская область</div>
